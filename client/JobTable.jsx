@@ -28,6 +28,7 @@ var JobTable = React.createClass({
                 <th>Call</th>                
                 <th>Shifts</th>
                 <th>Tier</th>
+                <th>Escalates In</th>
                 <th>View</th>
               </tr>
             </thead>

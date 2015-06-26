@@ -5,7 +5,7 @@ var mui = require('material-ui');
 var Authenticate = require('./Authenticate.js');
 var ThemeManager = new mui.Styles.ThemeManager();
 var JobTable = require('./JobRow.jsx');
-
+var JobAjax = require('./JobAjax.js');
 
 var LoginComponent = React.createClass({
   childContextTypes: {
@@ -30,8 +30,11 @@ var LoginComponent = React.createClass({
     ajaxAuth.done(function(key){
       Authenticate.setCookie(key);
       loginComponent.setState({visible : 'none'});
-      var job = [ {showName: { content: 'Test' }, id: {content: '1234'}, percentDone: {content: '8'}} ];
-      React.render(<JobTable rowData={job} />, document.getElementById('jobRows'));
+      var jobsAjax = JobAjax.getJobs();
+      jobsAjax.done(function(response){
+        var jobs = response;
+        React.render(<JobTable jobs={jobs} />, document.getElementById('jobRows'));
+      });
     });
   },
   handlePasswordChange: function(e){
