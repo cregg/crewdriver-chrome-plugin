@@ -11,6 +11,9 @@ var CrewDriverAppConsts = {
 		if (env === 'staging'){
 			return this.stagingUrl + this.authUrl;
 		}
+		if (env === 'live'){
+			return this.prodUrl + this.authUrl;
+		}
 	},
 	getAuthCheckUrl : function(env){
 		if(env === 'dev'){
@@ -18,6 +21,9 @@ var CrewDriverAppConsts = {
 		}	
 		if (env === 'staging'){
 			return this.stagingUrl + this.authCheckUrl;
+		}
+		if (env === 'live'){
+			return this.prodUrl + this.authCheckUrl;
 		}
 	},
 	getUrl : function(envString){
@@ -27,6 +33,9 @@ var CrewDriverAppConsts = {
 		if (envString === 'staging'){
 			return this.stagingUrl;
 		}	
+		if (envString === 'live'){
+			return this.prodUrl;
+		}
 	}
 };
 

@@ -1,9 +1,10 @@
 var $ = require('jQuery');
 var CDAConsts = require('./CrewDriverAppConsts.js');
+var Environment = require('./Environment.js');
 
 var OutSMSAjax = {
   getJobs : function(jobId){
-    return $.getJSON(CDAConsts.getUrl('staging') + 'rest/jobs/' + jobId + '/out_sms');
+    return $.getJSON(CDAConsts.getUrl(Environment.env) + 'rest/jobs/' + jobId + '/out_sms');
   },
   getOffersOnly : function(outSMSList){
     var offers = [];

@@ -1,6 +1,6 @@
 var $ = require('jQuery');
 var CDAConsts = require('./CrewDriverAppConsts.js');
-
+var Environment = require('./Environment.js');
 var Authenticate = {
 	authenticate : function(login, password){
 		var loginObject = {
@@ -8,18 +8,18 @@ var Authenticate = {
 			'password' : password
 		 };
 		 return $.ajax({
-		 	url : CDAConsts.getAuthUrl('staging'),
+		 	url : CDAConsts.getAuthUrl(Environment.env),
 		 	data : JSON.stringify(loginObject),
 		 	method : 'POST',
 		 	contentType : 'application/json'
 		 });
  	},
 	checkAdministrator : function(){
-		return $.get(CDAConsts.getAuthCheckUrl('staging'));
+		return $.get(CDAConsts.getAuthCheckUrl(Environment.env));
 	},
 	setCookie : function(response){
 		chrome.cookies.set({
-            		url : CDAConsts.getUrl('staging'),
+            		url : CDAConsts.getUrl(Environment.env),
             		name : 'gw_sess_id',
             		value : response.value,
             		expirationDate : ((new Date().getTime()/1000) + (3600*24))

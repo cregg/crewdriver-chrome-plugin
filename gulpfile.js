@@ -22,6 +22,9 @@ var mochaPhantomjs = require('gulp-mocha-phantomjs');
 // Open Index
 var open = require('gulp-open');
 
+// Set env variables
+var env = require('gulp-env');
+
 gulp.task('lint-client', function() {
   return gulp.src('./client/**/*.js')
     .pipe(jshint())
@@ -94,6 +97,34 @@ gulp.task('open', function(){
   .pipe(open());
 });
 
+gulp.task('development', function(){
+  env({
+    vars: {
+      ENVIRONMENT : 'dev'
+    }
+  });
+});
+
+gulp.task('staging', function(){
+  env({
+    vars: {
+      ENVIRONMENT : 'staging'
+    }
+  });
+});
+
+gulp.task('production', function(){
+  env({
+    vars: {
+      ENVIRONMENT : 'production'
+    }
+  });
+});
+
 gulp.task('build', ['minify', 'browserify-client']);
 
 gulp.task('default', ['test', 'build', 'watch']);
+
+gulp.task('start-dev', ['default']);
+gulp.task('start-staging', ['default']);
+gulp.task('start-prod', ['default']);

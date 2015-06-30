@@ -1,10 +1,11 @@
 var $ = require('jQuery');
 var CDAConsts = require('./CrewDriverAppConsts.js');
+var Environment = require('./Environment.js');
 
 var JobAjax = {
 	getJobs : function(){
 		return $.ajax({
-			url : CDAConsts.getUrl('staging') + 'rest/jobs',
+			url : CDAConsts.getUrl(Environment.env) + 'rest/jobs',
 			headers : { 'max' : '10' } 
 	});
 	}
