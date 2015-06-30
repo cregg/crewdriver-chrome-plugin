@@ -1,6 +1,6 @@
 var React = require('react');
 var mui = require('material-ui');
-var CircularProgress = mui.CircularProgress;
+var LinearProgress = mui.LinearProgress;
 var ThemeManager = new mui.Styles.ThemeManager();
 
 var LoadingComponent = React.createClass({
@@ -15,10 +15,14 @@ var LoadingComponent = React.createClass({
   },
 
   render: function() {
+    var message = this.props.message !== null ? this.props.message : "";
     return (
-      <div>
-        <CircularProgress mode="indeterminate" />
-      </div>
+        <div>
+            <h5>{message}</h5>
+          <div>
+            <LinearProgress mode="indeterminate" />
+          </div>
+        </div>
     );
   }
 

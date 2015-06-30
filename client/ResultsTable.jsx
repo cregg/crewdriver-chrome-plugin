@@ -37,23 +37,26 @@ var ResultsTable = React.createClass({
   },
   render: function() {
     var showDivClass = ClassNames(this.state);
+    var confirmMessage = this.props.confirmed.length > 0 ?  'Confirmed Crew for call ' : 'No Confirmed Crew for call ';
+    confirmMessage += this.props.job.showName;
+    var messagedMessage = this.props.rows.length > 0 ?  'Messaged Crew for call ' : 'No messaged Crew for call ';
+    messagedMessage += this.props.job.showName;
       return (
         <div>
-          <Tabs>
+          <Tabs initialSelectedIndex={1}>
+            <Tab label="<- Return To Jobs" onActive={this.handleBackClick}/>
             <Tab label="Confirmed"> 
               <div> 
-                <h5>Confirmed Crew for call {this.props.job.showName}</h5> 
+                <h5>{confirmMessage}</h5> 
                 <ConfirmedTable confirmed={this.props.confirmed} />
               </div> 
             </Tab> 
-            <Tab label="Messaged" className="overFlowY"> 
+            <Tab label="Messaged"> 
+              <h5>{messagedMessage}</h5>
               <div> 
                 <OutSMSTable sms={this.props.rows} />
               </div> 
             </Tab>
-          </Tabs>
-          <Tabs>
-            <Tab label="Return To Jobs" onActive={this.handleBackClick}/>
           </Tabs>
         </div>
    );

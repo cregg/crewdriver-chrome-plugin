@@ -5,6 +5,6 @@ var InSMSAjax = {
 	getJobs : function(jobId){
 		return $.getJSON(CDAConsts.getUrl('staging') + 'rest/jobs/' + jobId + '/in_sms');
 	}
-}
+};
 
 module.exports = InSMSAjax;

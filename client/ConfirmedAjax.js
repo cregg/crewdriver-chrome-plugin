@@ -17,6 +17,6 @@ var ConfirmedAjax = {
     }
     return crewArray;
   }
-}
+};
 
 module.exports = ConfirmedAjax;

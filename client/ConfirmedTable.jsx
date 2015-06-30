@@ -10,7 +10,7 @@ var ConfirmedTable = React.createClass({
       rows.push(<ConfirmedRow crewMember={crewMembers[i]} />);
     }  
     return (
-      <div>
+      <div style={{ overflowY : 'scroll', maxHeight : '350px' }}>
         <table>
           <thead>
             <tr>

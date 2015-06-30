@@ -53,7 +53,7 @@ var ConfirmedAjax = {
     }
     return crewArray;
   }
-}
+};
 
 module.exports = ConfirmedAjax;
 
@@ -92,7 +92,7 @@ var ConfirmedTable = React.createClass({displayName: "ConfirmedTable",
       rows.push(React.createElement(ConfirmedRow, {crewMember: crewMembers[i]}));
     }  
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {style: { overflowY : 'scroll', maxHeight : '350px'}}, 
         React.createElement("table", null, 
           React.createElement("thead", null, 
             React.createElement("tr", null, 
@@ -179,10 +179,10 @@ var JobAjax = {
 	getJobs : function(){
 		return $.ajax({
 			url : CDAConsts.getUrl('staging') + 'rest/jobs',
-			headers : { 'max' : '3' } 
+			headers : { 'max' : '10' } 
 	});
 	}
-}
+};
 
 module.exports = JobAjax;
 
@@ -194,7 +194,15 @@ var $ = require('jquery');
 var OutSMSAjax = require('./OutSMSAjax.js');
 var ResultsTable = require('./ResultsTable.jsx');
 var ConfirmedAjax = require('./ConfirmedAjax.js');
-
+var LoadingComponent = require('./LoadingComponent.jsx');
+var jobStatusStyle = {
+  'All Done' : {
+    backgroundColor : '#5AC4A4'
+  },
+  'Complete' : {
+    backgroundColor : '#C9302C'
+  }
+}
 var JobRow = React.createClass({displayName: "JobRow",
   handleClick : function(event){
     this.props.table.setState({
@@ -204,9 +212,11 @@ var JobRow = React.createClass({displayName: "JobRow",
     var confirmedAjax = ConfirmedAjax.getConfirmed(this.props.job.jobId);
     var thisJob = this.props.job;
     var thisTable = this.props.table;
+    var loadingComponent = React.render(React.createElement(LoadingComponent, {message: "Loading Job Details..."}), document.getElementById('loading'));
     $.when(outSMSAjax, confirmedAjax).done(function (outListResponse, confirmedListResponse){
       var outList = outListResponse[0];
       outList = OutSMSAjax.getOffersOnly(outList);
+      React.unmountComponentAtNode(document.getElementById('loading'));
       var confirmedList = ConfirmedAjax.getCrewObjects(confirmedListResponse[0].contractorHash);
       React.render(React.createElement(ResultsTable, {confirmed: confirmedList, 
                                                       rows: outList, 
@@ -216,8 +226,9 @@ var JobRow = React.createClass({displayName: "JobRow",
     });
   },
   render: function() {
+    
     return (
-        React.createElement("tr", null, 
+        React.createElement("tr", {style: jobStatusStyle[this.props.job.status]}, 
           React.createElement("td", null, this.props.job.jobId), 
           React.createElement("td", null, this.props.job.showName), 
           React.createElement("td", null, this.props.job.callName), 
@@ -233,7 +244,7 @@ var JobRow = React.createClass({displayName: "JobRow",
 module.exports = JobRow;
 
 }).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/JobRow.jsx","/")
-},{"./ConfirmedAjax.js":2,"./OutSMSAjax.js":12,"./ResultsTable.jsx":14,"1YiZ5S":20,"buffer":17,"jquery":22,"react":320}],9:[function(require,module,exports){
+},{"./ConfirmedAjax.js":2,"./LoadingComponent.jsx":10,"./OutSMSAjax.js":12,"./ResultsTable.jsx":14,"1YiZ5S":20,"buffer":17,"jquery":22,"react":320}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var React = require('react');
 var $ = require('jquery');
@@ -285,7 +296,7 @@ module.exports = JobTable;
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var React = require('react');
 var mui = require('material-ui');
-var CircularProgress = mui.CircularProgress;
+var LinearProgress = mui.LinearProgress;
 var ThemeManager = new mui.Styles.ThemeManager();
 
 var LoadingComponent = React.createClass({displayName: "LoadingComponent",
@@ -300,10 +311,14 @@ var LoadingComponent = React.createClass({displayName: "LoadingComponent",
   },
 
   render: function() {
+    var message = this.props.message !== null ? this.props.message : "";
     return (
-      React.createElement("div", null, 
-        React.createElement(CircularProgress, {mode: "indeterminate"})
-      )
+        React.createElement("div", null, 
+            React.createElement("h5", null, message), 
+          React.createElement("div", null, 
+            React.createElement(LinearProgress, {mode: "indeterminate"})
+          )
+        )
     );
   }
 
@@ -320,8 +335,9 @@ var React = require('react');
 var mui = require('material-ui');
 var Authenticate = require('./Authenticate.js');
 var ThemeManager = new mui.Styles.ThemeManager();
-var JobTable = require('./JobRow.jsx');
+var JobTable = require('./JobTable.jsx');
 var JobAjax = require('./JobAjax.js');
+var LoadingComponent = require('./LoadingComponent.jsx');
 
 var LoginComponent = React.createClass({displayName: "LoginComponent",
   childContextTypes: {
@@ -340,14 +356,15 @@ var LoginComponent = React.createClass({displayName: "LoginComponent",
   },
   handleSubmit: function(e){
     e.preventDefault();
-    var ajaxAuth = Authenticate.authenticate(this.state.login, this.state.password);
-    var visible = '';
     var loginComponent = this;
+    loginComponent.setState({visible : 'none'});
+    var loadingComponent = React.render(React.createElement(LoadingComponent, {message: "Loading Jobs..."}), document.getElementById('loading'));
+    var ajaxAuth = Authenticate.authenticate(this.state.login, this.state.password);
     ajaxAuth.done(function(key){
       Authenticate.setCookie(key);
-      loginComponent.setState({visible : 'none'});
       var jobsAjax = JobAjax.getJobs();
       jobsAjax.done(function(response){
+        React.unmountComponentAtNode(document.getElementById('loading'));
         var jobs = response;
         React.render(React.createElement(JobTable, {jobs: jobs}), document.getElementById('jobRows'));
       });
@@ -397,7 +414,7 @@ var LoginComponent = React.createClass({displayName: "LoginComponent",
 module.exports = LoginComponent;
 
 }).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/LoginComponent.jsx","/")
-},{"./Authenticate.js":1,"./JobAjax.js":7,"./JobRow.jsx":8,"1YiZ5S":20,"buffer":17,"material-ui":56,"react":320}],12:[function(require,module,exports){
+},{"./Authenticate.js":1,"./JobAjax.js":7,"./JobTable.jsx":9,"./LoadingComponent.jsx":10,"1YiZ5S":20,"buffer":17,"material-ui":56,"react":320}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var $ = require('jQuery');
 var CDAConsts = require('./CrewDriverAppConsts.js');
@@ -434,7 +451,7 @@ var OutSMSTable = React.createClass({displayName: "OutSMSTable",
       rows.push(React.createElement(InSMSRow, {sms: sms[i], key: sms[i].id}));
     }
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {style: { 'overflow-y' : 'scroll', 'max-height' : '350px'}}, 
         React.createElement("table", null, 
           React.createElement("thead", null, 
             React.createElement("tr", null, 
@@ -497,23 +514,26 @@ var ResultsTable = React.createClass({displayName: "ResultsTable",
   },
   render: function() {
     var showDivClass = ClassNames(this.state);
+    var confirmMessage = this.props.confirmed.length > 0 ?  'Confirmed Crew for call ' : 'No Confirmed Crew for call ';
+    confirmMessage += this.props.job.showName;
+    var messagedMessage = this.props.rows.length > 0 ?  'Messaged Crew for call ' : 'No messaged Crew for call ';
+    messagedMessage += this.props.job.showName;
       return (
         React.createElement("div", null, 
-          React.createElement(Tabs, null, 
+          React.createElement(Tabs, {initialSelectedIndex: 1}, 
+            React.createElement(Tab, {label: "<- Return To Jobs", onActive: this.handleBackClick}), 
             React.createElement(Tab, {label: "Confirmed"}, 
               React.createElement("div", null, 
-                React.createElement("h5", null, "Confirmed Crew for call ", this.props.job.showName), 
+                React.createElement("h5", null, confirmMessage), 
                 React.createElement(ConfirmedTable, {confirmed: this.props.confirmed})
               )
             ), 
-            React.createElement(Tab, {label: "Messaged", className: "overFlowY"}, 
+            React.createElement(Tab, {label: "Messaged"}, 
+              React.createElement("h5", null, messagedMessage), 
               React.createElement("div", null, 
                 React.createElement(OutSMSTable, {sms: this.props.rows})
               )
             )
-          ), 
-          React.createElement(Tabs, null, 
-            React.createElement(Tab, {label: "Return To Jobs", onActive: this.handleBackClick})
           )
         )
    );
@@ -535,24 +555,24 @@ var $ = require('jquery');
 var JobAjax = require('./JobAjax.js');
 var administratorCheck = Authenticate.checkAdministrator();
 
-React.render(React.createElement(LoadingComponent, null), document.getElementById('loading'));
+var loadingComponent = React.render(React.createElement(LoadingComponent, {message: "Loading Details..."}), document.getElementById('loading'));
 
 administratorCheck.done(function(response) {
-  $('#loading').hide();	
   var jobsAjax = JobAjax.getJobs();
   jobsAjax.done(function(response){
+  	React.unmountComponentAtNode(document.getElementById('loading'));
   	var jobs = response;
   	React.render(React.createElement(JobTable, {jobs: jobs}), document.getElementById('jobRows'));
   });
 });
 
 administratorCheck.fail(function(response) {
-  $('#loading').hide();
+  React.unmountComponentAtNode(document.getElementById('loading'));
   React.render(React.createElement(LoginComponent, null), document.getElementById('crewdriver'));
   $('#crewdriver').show();
 });
 
-}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_ba67ae2a.js","/")
+}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_406dcb38.js","/")
 },{"./Authenticate.js":1,"./JobAjax.js":7,"./JobTable.jsx":9,"./LoadingComponent.jsx":10,"./LoginComponent.jsx":11,"1YiZ5S":20,"buffer":17,"jquery":22,"material-ui":56,"react":320}],16:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!

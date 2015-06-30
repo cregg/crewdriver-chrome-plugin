@@ -4,8 +4,9 @@ var React = require('react');
 var mui = require('material-ui');
 var Authenticate = require('./Authenticate.js');
 var ThemeManager = new mui.Styles.ThemeManager();
-var JobTable = require('./JobRow.jsx');
+var JobTable = require('./JobTable.jsx');
 var JobAjax = require('./JobAjax.js');
+var LoadingComponent = require('./LoadingComponent.jsx');
 
 var LoginComponent = React.createClass({
   childContextTypes: {
@@ -24,14 +25,15 @@ var LoginComponent = React.createClass({
   },
   handleSubmit: function(e){
     e.preventDefault();
-    var ajaxAuth = Authenticate.authenticate(this.state.login, this.state.password);
-    var visible = '';
     var loginComponent = this;
+    loginComponent.setState({visible : 'none'});
+    var loadingComponent = React.render(<LoadingComponent message="Loading Jobs..."/>, document.getElementById('loading'));
+    var ajaxAuth = Authenticate.authenticate(this.state.login, this.state.password);
     ajaxAuth.done(function(key){
       Authenticate.setCookie(key);
-      loginComponent.setState({visible : 'none'});
       var jobsAjax = JobAjax.getJobs();
       jobsAjax.done(function(response){
+        React.unmountComponentAtNode(document.getElementById('loading'));
         var jobs = response;
         React.render(<JobTable jobs={jobs} />, document.getElementById('jobRows'));
       });

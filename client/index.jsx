@@ -8,19 +8,19 @@ var $ = require('jquery');
 var JobAjax = require('./JobAjax.js');
 var administratorCheck = Authenticate.checkAdministrator();
 
-React.render(<LoadingComponent />, document.getElementById('loading'));
+var loadingComponent = React.render(<LoadingComponent message="Loading Details..."/>, document.getElementById('loading'));
 
 administratorCheck.done(function(response) {
-  $('#loading').hide();	
   var jobsAjax = JobAjax.getJobs();
   jobsAjax.done(function(response){
+  	React.unmountComponentAtNode(document.getElementById('loading'));
   	var jobs = response;
   	React.render(<JobTable jobs={jobs} />, document.getElementById('jobRows'));
   });
 });
 
 administratorCheck.fail(function(response) {
-  $('#loading').hide();
+  React.unmountComponentAtNode(document.getElementById('loading'));
   React.render(<LoginComponent />, document.getElementById('crewdriver'));
   $('#crewdriver').show();
 });

@@ -5,9 +5,9 @@ var JobAjax = {
 	getJobs : function(){
 		return $.ajax({
 			url : CDAConsts.getUrl('staging') + 'rest/jobs',
-			headers : { 'max' : '3' } 
+			headers : { 'max' : '10' } 
 	});
 	}
-}
+};
 
 module.exports = JobAjax;

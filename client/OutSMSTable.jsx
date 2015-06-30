@@ -9,7 +9,7 @@ var OutSMSTable = React.createClass({
       rows.push(< InSMSRow sms={sms[i]} key={sms[i].id} />);
     }
     return (
-      <div>
+      <div style={{ 'overflow-y' : 'scroll', 'max-height' : '350px' }}>
         <table>
           <thead>
             <tr>
