@@ -14,5 +14,9 @@
   "http://localhost:8080/*",
   "http://go.crewdriverapp.com/*",
   "http://stagedriver.herokuapp.com/*"
-   ]
+   ],
+   "icons" : {
+    "16": "crewdriver-logo.png",
+    "57": "crewdriver-logo-57x57.png"
+   }
 }

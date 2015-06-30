@@ -25,6 +25,8 @@ var open = require('gulp-open');
 // Set env variables
 var env = require('gulp-env');
 
+var gutil = require('gulp-util');
+
 gulp.task('lint-client', function() {
   return gulp.src('./client/**/*.js')
     .pipe(jshint())
@@ -87,7 +89,7 @@ gulp.task('minify', ['styles'], function() {
 
 gulp.task('uglify', ['browserify-client'], function() {
   return gulp.src('build/crewdriver.js')
-    .pipe(uglify())
+    .pipe(uglify().on('error', gutil.log))
     .pipe(rename('crewdriver.min.js'))
     .pipe(gulp.dest('public/javascripts'));
 });
@@ -97,34 +99,6 @@ gulp.task('open', function(){
   .pipe(open());
 });
 
-gulp.task('development', function(){
-  env({
-    vars: {
-      ENVIRONMENT : 'dev'
-    }
-  });
-});
-
-gulp.task('staging', function(){
-  env({
-    vars: {
-      ENVIRONMENT : 'staging'
-    }
-  });
-});
-
-gulp.task('production', function(){
-  env({
-    vars: {
-      ENVIRONMENT : 'production'
-    }
-  });
-});
-
-gulp.task('build', ['minify', 'browserify-client']);
+gulp.task('build', ['minify', 'uglify']);
 
 gulp.task('default', ['test', 'build', 'watch']);
-
-gulp.task('start-dev', ['default']);
-gulp.task('start-staging', ['default']);
-gulp.task('start-prod', ['default']);

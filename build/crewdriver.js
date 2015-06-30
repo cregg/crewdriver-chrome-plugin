@@ -324,7 +324,7 @@ var LoadingComponent = React.createClass({displayName: "LoadingComponent",
   childContextTypes: {
       muiTheme: React.PropTypes.object
   },
-  getChildContext() {
+  getChildContext: function() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
@@ -363,12 +363,12 @@ var LoginComponent = React.createClass({displayName: "LoginComponent",
   childContextTypes: {
     muiTheme: React.PropTypes.object
   },
-  getChildContext() {
+  getChildContext: function() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
   },
-  getInitialState(){
+  getInitialState: function(){
     return { visible : 'inline' };
   },
   setVisibleState: function(value){
@@ -516,7 +516,7 @@ var ResultsTable = React.createClass({displayName: "ResultsTable",
   childContextTypes: {
       muiTheme: React.PropTypes.object
   },
-  getChildContext() {
+  getChildContext: function() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
@@ -593,7 +593,7 @@ administratorCheck.fail(function(response) {
   $('#crewdriver').show();
 });
 
-}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_822d0a2.js","/")
+}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_ef1f17cd.js","/")
 },{"./Authenticate.js":1,"./JobAjax.js":8,"./JobTable.jsx":10,"./LoadingComponent.jsx":11,"./LoginComponent.jsx":12,"1YiZ5S":21,"buffer":18,"jquery":23,"material-ui":57,"react":321}],17:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!

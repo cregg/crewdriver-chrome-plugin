@@ -8,7 +8,7 @@ var LoadingComponent = React.createClass({
   childContextTypes: {
       muiTheme: React.PropTypes.object
   },
-  getChildContext() {
+  getChildContext: function() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
