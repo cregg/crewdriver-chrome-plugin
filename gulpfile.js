@@ -99,6 +99,6 @@ gulp.task('open', function(){
   .pipe(open());
 });
 
-gulp.task('build', ['minify', 'uglify']);
+gulp.task('build', ['minify', 'browserify-client']);
 
 gulp.task('default', ['test', 'build', 'watch']);

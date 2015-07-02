@@ -2,6 +2,9 @@ var React = require('react');
 var $ = require('jquery');
 var JobRow = require('./JobRow.jsx');
 var ClassNames = require('classnames');
+var CreateButton = require('./CreateButton.jsx');
+var CDAConsts = require('./CrewDriverAppConsts.js');
+var Environment = require('./Environment.js');
 
 var JobTable = React.createClass({
   getInitialState : function(){
@@ -18,6 +21,7 @@ var JobTable = React.createClass({
     }
     var divClassNames = ClassNames(this.state.hide);
     var tableClassNames = ClassNames(this.state.hoverable);
+    var createJobUrl = CDAConsts.getUrl(Environment.env) + 'rest/jobs/new';
     return (
         <div className={divClassNames}>
           <table className={tableClassNames}>
@@ -36,6 +40,7 @@ var JobTable = React.createClass({
               {rows}
             </tbody>
           </table>
+          <div className="right-align"><CreateButton url={createJobUrl} /></div>
         </div>
    );
   }
