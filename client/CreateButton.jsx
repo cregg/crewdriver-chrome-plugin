@@ -22,7 +22,7 @@ var CreateButton = React.createClass({
       <FloatingActionButton mini={true} 
                                               secondary={true}>
         <FontIcon className="material-icons"
-                           onClick={this.openNewCallPage}>add
+                           onClick={this.openNewCallPage}>{this.props.icon}
         </FontIcon>
       </FloatingActionButton>
     );

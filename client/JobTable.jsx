@@ -22,6 +22,7 @@ var JobTable = React.createClass({
     var divClassNames = ClassNames(this.state.hide);
     var tableClassNames = ClassNames(this.state.hoverable);
     var createJobUrl = CDAConsts.getUrl(Environment.env) + 'rest/jobs/new';
+    var dashboardUrl = CDAConsts.getUrl(Environment.env) + 'rest/jobs/'
     return (
         <div className={divClassNames}>
           <table className={tableClassNames}>
@@ -40,7 +41,14 @@ var JobTable = React.createClass({
               {rows}
             </tbody>
           </table>
-          <div className="right-align"><CreateButton url={createJobUrl} /></div>
+          <div className="row">
+            <div className="col s6">
+              <div className="left-align"><CreateButton url={dashboardUrl} icon="assessment" /></div>
+            </div>
+            <div className="col s6">
+              <div className="right-align"><CreateButton url={createJobUrl} icon="add" /></div>
+            </div>
+          </div>
         </div>
    );
   }

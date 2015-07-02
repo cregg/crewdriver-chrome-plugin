@@ -139,7 +139,7 @@ var CreateButton = React.createClass({displayName: "CreateButton",
       React.createElement(FloatingActionButton, {mini: true, 
                                               secondary: true}, 
         React.createElement(FontIcon, {className: "material-icons", 
-                           onClick: this.openNewCallPage}, "add"
+                           onClick: this.openNewCallPage}, this.props.icon
         )
       )
     );
@@ -326,6 +326,7 @@ var JobTable = React.createClass({displayName: "JobTable",
     var divClassNames = ClassNames(this.state.hide);
     var tableClassNames = ClassNames(this.state.hoverable);
     var createJobUrl = CDAConsts.getUrl(Environment.env) + 'rest/jobs/new';
+    var dashboardUrl = CDAConsts.getUrl(Environment.env) + 'rest/jobs/'
     return (
         React.createElement("div", {className: divClassNames}, 
           React.createElement("table", {className: tableClassNames}, 
@@ -344,7 +345,14 @@ var JobTable = React.createClass({displayName: "JobTable",
               rows
             )
           ), 
-          React.createElement("div", {className: "right-align"}, React.createElement(CreateButton, {url: createJobUrl}))
+          React.createElement("div", {className: "row"}, 
+            React.createElement("div", {className: "col s6"}, 
+              React.createElement("div", {className: "left-align"}, React.createElement(CreateButton, {url: dashboardUrl, icon: "assessment"}))
+            ), 
+            React.createElement("div", {className: "col s6"}, 
+              React.createElement("div", {className: "right-align"}, React.createElement(CreateButton, {url: createJobUrl, icon: "add"}))
+            )
+          )
         )
    );
   }
@@ -644,7 +652,7 @@ administratorCheck.fail(function(response) {
   $('#crewdriver').show();
 });
 
-}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_693fb2ee.js","/")
+}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_e4fff0fc.js","/")
 },{"./Authenticate.js":1,"./JobAjax.js":9,"./JobTable.jsx":11,"./LoadingComponent.jsx":12,"./LoginComponent.jsx":13,"1YiZ5S":22,"buffer":19,"jquery":24,"material-ui":58,"react":322}],18:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!
