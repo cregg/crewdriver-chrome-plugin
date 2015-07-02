@@ -163,7 +163,7 @@ module.exports = CrewDriverAppConsts;
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var Environment = {
 	env : 'live'
-}
+};
 
 module.exports = Environment;
 
@@ -217,10 +217,10 @@ var ConfirmedAjax = require('./ConfirmedAjax.js');
 var LoadingComponent = require('./LoadingComponent.jsx');
 var jobStatusStyle = {
   'All Done' : {
-    backgroundColor : '#5AC4A4'
+    backgroundColor : '#B2DFDB'
   },
   'Complete' : {
-    backgroundColor : '#C9302C'
+    backgroundColor : '#FFE082'
   }
 }
 var JobRow = React.createClass({displayName: "JobRow",
@@ -334,10 +334,12 @@ var LoadingComponent = React.createClass({displayName: "LoadingComponent",
     var message = this.props.message !== null ? this.props.message : "";
     return (
         React.createElement("div", null, 
-            React.createElement("h5", null, message), 
-          React.createElement("div", null, 
+          React.createElement("div", {className: "row"}, 
+            React.createElement("div", {className: "col s12"}, 
+              React.createElement("h5", null, message)
+            )
+          ), 
             React.createElement(LinearProgress, {mode: "indeterminate"})
-          )
         )
     );
   }
@@ -544,13 +546,21 @@ var ResultsTable = React.createClass({displayName: "ResultsTable",
           React.createElement(Tabs, {initialSelectedIndex: 1}, 
             React.createElement(Tab, {label: "<- Return To Jobs", onActive: this.handleBackClick}), 
             React.createElement(Tab, {label: "Confirmed"}, 
+              React.createElement("div", {className: "row"}, 
+                React.createElement("div", {className: "col s12"}, 
+                  React.createElement("h5", null, confirmMessage)
+                )
+              ), 
               React.createElement("div", null, 
-                React.createElement("h5", null, confirmMessage), 
                 React.createElement(ConfirmedTable, {confirmed: this.props.confirmed})
               )
             ), 
             React.createElement(Tab, {label: "Messaged"}, 
-              React.createElement("h5", null, messagedMessage), 
+              React.createElement("div", {className: "row"}, 
+                React.createElement("div", {className: "col s12"}, 
+                  React.createElement("h5", null, messagedMessage)
+                )
+              ), 
               React.createElement("div", null, 
                 React.createElement(OutSMSTable, {sms: this.props.rows})
               )
@@ -593,7 +603,7 @@ administratorCheck.fail(function(response) {
   $('#crewdriver').show();
 });
 
-}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_ef1f17cd.js","/")
+}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_7a1369d9.js","/")
 },{"./Authenticate.js":1,"./JobAjax.js":8,"./JobTable.jsx":10,"./LoadingComponent.jsx":11,"./LoginComponent.jsx":12,"1YiZ5S":21,"buffer":18,"jquery":23,"material-ui":57,"react":321}],17:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!

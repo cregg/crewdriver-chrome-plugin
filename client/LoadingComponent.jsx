@@ -18,10 +18,12 @@ var LoadingComponent = React.createClass({
     var message = this.props.message !== null ? this.props.message : "";
     return (
         <div>
-            <h5>{message}</h5>
-          <div>
-            <LinearProgress mode="indeterminate" />
+          <div className="row">
+            <div className="col s12">
+              <h5>{message}</h5>
+            </div>
           </div>
+            <LinearProgress mode="indeterminate" />
         </div>
     );
   }

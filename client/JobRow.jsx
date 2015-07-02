@@ -6,10 +6,10 @@ var ConfirmedAjax = require('./ConfirmedAjax.js');
 var LoadingComponent = require('./LoadingComponent.jsx');
 var jobStatusStyle = {
   'All Done' : {
-    backgroundColor : '#5AC4A4'
+    backgroundColor : '#B2DFDB'
   },
   'Complete' : {
-    backgroundColor : '#C9302C'
+    backgroundColor : '#FFE082'
   }
 }
 var JobRow = React.createClass({

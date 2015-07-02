@@ -46,13 +46,21 @@ var ResultsTable = React.createClass({
           <Tabs initialSelectedIndex={1}>
             <Tab label="<- Return To Jobs" onActive={this.handleBackClick}/>
             <Tab label="Confirmed"> 
-              <div> 
-                <h5>{confirmMessage}</h5> 
+              <div className="row"> 
+                <div className="col s12">
+                  <h5>{confirmMessage}</h5> 
+                </div>
+              </div>
+              <div>
                 <ConfirmedTable confirmed={this.props.confirmed} />
               </div> 
             </Tab> 
             <Tab label="Messaged"> 
-              <h5>{messagedMessage}</h5>
+              <div className="row"> 
+                <div className="col s12">
+                  <h5>{messagedMessage}</h5>
+                </div>
+              </div>
               <div> 
                 <OutSMSTable sms={this.props.rows} />
               </div> 
