@@ -15,7 +15,7 @@ var CreateButton = React.createClass({
   },
   openNewCallPage: function(){
     var win = window.open(this.props.url);
-    win.focus();  
+    win.focus(); 
   },
   render: function() {
     return (

@@ -132,7 +132,7 @@ var CreateButton = React.createClass({displayName: "CreateButton",
   },
   openNewCallPage: function(){
     var win = window.open(this.props.url);
-    win.focus();  
+    win.focus(); 
   },
   render: function() {
     return (
@@ -198,7 +198,7 @@ module.exports = CrewDriverAppConsts;
 },{"1YiZ5S":22,"buffer":19}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var Environment = {
-	env : 'staging'
+	env : 'live'
 };
 
 module.exports = Environment;
@@ -652,7 +652,7 @@ administratorCheck.fail(function(response) {
   $('#crewdriver').show();
 });
 
-}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_e4fff0fc.js","/")
+}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_d2fde5df.js","/")
 },{"./Authenticate.js":1,"./JobAjax.js":9,"./JobTable.jsx":11,"./LoadingComponent.jsx":12,"./LoginComponent.jsx":13,"1YiZ5S":22,"buffer":19,"jquery":24,"material-ui":58,"react":322}],18:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!
