@@ -10,7 +10,7 @@ var OutSMSTable = React.createClass({
     }
     return (
       <div style={{ 'overflow-y' : 'scroll', 'max-height' : '350px' }}>
-        <table>
+        <table className='striped'>
           <thead>
             <tr>
               <th>Crew Member</th>

@@ -17,7 +17,11 @@ var JobTable = React.createClass({
     var rows = [];
     var jobs = this.props.jobs;
     for(var i = 0; i < jobs.length; i++){
-      rows.push(< JobRow job={jobs[i]} key={jobs[i].id} table={this} />);
+      rows.push(< JobRow job={jobs[i]} 
+                                          key={jobs[i].id} 
+                                          table={this} 
+                                          handleJobView={this.props.handleJobView} 
+                                          mountLandingPage={this.props.mountLandingPage}/>);
     }
     var divClassNames = ClassNames(this.state.hide);
     var tableClassNames = ClassNames(this.state.hoverable);

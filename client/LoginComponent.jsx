@@ -7,6 +7,7 @@ var ThemeManager = new mui.Styles.ThemeManager();
 var JobTable = require('./JobTable.jsx');
 var JobAjax = require('./JobAjax.js');
 var LoadingComponent = require('./LoadingComponent.jsx');
+var LandingPage = require('./LandingPage.jsx');
 
 var LoginComponent = React.createClass({
   childContextTypes: {
@@ -30,12 +31,12 @@ var LoginComponent = React.createClass({
     var loadingComponent = React.render(<LoadingComponent message="Loading Jobs..."/>, document.getElementById('loading'));
     var ajaxAuth = Authenticate.authenticate(this.state.login, this.state.password);
     ajaxAuth.done(function(key){
-      Authenticate.setCookie(key);
+      Authenticate.setCookie(key);     
       var jobsAjax = JobAjax.getJobs();
       jobsAjax.done(function(response){
         React.unmountComponentAtNode(document.getElementById('loading'));
         var jobs = response;
-        React.render(<JobTable jobs={jobs} />, document.getElementById('jobRows'));
+        React.render(<LandingPage jobs={jobs} />, document.getElementById('jobRows'));
       });
     });
   },

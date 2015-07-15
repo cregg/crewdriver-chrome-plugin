@@ -7,6 +7,7 @@ var JobTable = require('./JobTable.jsx');
 var $ = require('jquery');
 var JobAjax = require('./JobAjax.js');
 var administratorCheck = Authenticate.checkAdministrator();
+var LandingPage = require('./LandingPage.jsx');
 
 var loadingComponent = React.render(<LoadingComponent message="Loading Details..."/>, document.getElementById('loading'));
 
@@ -15,7 +16,7 @@ administratorCheck.done(function(response) {
   jobsAjax.done(function(response){
   	React.unmountComponentAtNode(document.getElementById('loading'));
   	var jobs = response;
-  	React.render(<JobTable jobs={jobs} />, document.getElementById('jobRows'));
+  	React.render(<LandingPage jobs={jobs} />, document.getElementById('jobRows'));
   });
 });
 

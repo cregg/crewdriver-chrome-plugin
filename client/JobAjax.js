@@ -6,7 +6,9 @@ var JobAjax = {
 	getJobs : function(){
 		return $.ajax({
 			url : CDAConsts.getUrl(Environment.env) + 'rest/jobs',
-			headers : { 'max' : '10' } 
+			headers : { 'max' : '10' },
+			dataType : 'json'
+
 	});
 	}
 };

@@ -10,11 +10,9 @@ var Tabs = mui.Tabs;
 var Tab = mui.Tab;
 var ThemeManager = new mui.Styles.ThemeManager();
 
-
 injectTapEventPlugin();
 
-var ResultsTable = React.createClass({
-  
+var ResultsTable = React.createClass({  
   childContextTypes: {
       muiTheme: React.PropTypes.object
   },
@@ -25,8 +23,9 @@ var ResultsTable = React.createClass({
   },
   handleBackClick : function(){
     this.props.table.setState({
-      hide : 'display'
+      hide : 'visible'
     });
+    this.props.mountLandingPage();
     React.unmountComponentAtNode(document.getElementById('inSMSTable'));
   },
   getInitialState : function(){
@@ -44,9 +43,10 @@ var ResultsTable = React.createClass({
       return (
         <div>
           <Tabs initialSelectedIndex={1}>
-            <Tab label="<- Return To Jobs" onActive={this.handleBackClick}/>
-            <Tab label="Confirmed"> 
-              <div className="row"> 
+            <Tab label="<- Return To Jobs" onActive={this.handleBackClick}
+                                                                  style={{ backgroundColor : '#276B57' }} />
+            <Tab label="Confirmed" style={{ backgroundColor : '#276B57' }} > 
+              <div className="row" style={{ marginBottom : '5px' }}> 
                 <div className="col s12">
                   <h5>{confirmMessage}</h5> 
                 </div>
@@ -55,8 +55,8 @@ var ResultsTable = React.createClass({
                 <ConfirmedTable confirmed={this.props.confirmed} />
               </div> 
             </Tab> 
-            <Tab label="Messaged"> 
-              <div className="row"> 
+            <Tab label="Messaged" style={{ backgroundColor : '#276B57' }}> 
+              <div className="row" style={{ marginBottom : '5px' }}> 
                 <div className="col s12">
                   <h5>{messagedMessage}</h5>
                 </div>

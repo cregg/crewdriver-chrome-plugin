@@ -11,7 +11,7 @@ var ConfirmedTable = React.createClass({
     }  
     return (
       <div style={{ overflowY : 'scroll', maxHeight : '350px' }}>
-        <table>
+        <table className='striped'>
           <thead>
             <tr>
               <th>Crew</th>

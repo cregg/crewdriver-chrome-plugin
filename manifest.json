@@ -3,20 +3,24 @@
  
   "name": "CrewDriver Plugin",
   "description": "Get Updates From CrewDriver In Your Browser.",
-  "version": "1.1.1.2",
- 
+  "version": "1.1.1.5",
+  "background": {
+    "scripts": ["badges.js"]
+  },
   "browser_action": {
    "default_icon": "crewdriver-logo.png",
    "default_popup": "public/index.html"
   },
   "permissions": [
    "cookies",
+   "http://localhost:8080/",
   "https://go.crewdriverapp.com/*",
   "http://stagedriver.herokuapp.com/*"
    ],
    "icons" : {
     "16": "crewdriver-logo.png",
     "32": "crewdriver_32x32.png",
-    "57": "crewdriver-logo-57x57.png"
+    "57": "crewdriver-logo-57x57.png",
+    "64": "crew-driver-64x64.png"
    }
 }

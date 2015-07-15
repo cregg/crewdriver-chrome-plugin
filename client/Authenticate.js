@@ -18,6 +18,7 @@ var Authenticate = {
 		return $.get(CDAConsts.getAuthCheckUrl(Environment.env));
 	},
 	setCookie : function(response){
+		localStorage.setItem('adminKey', response.value);
 		chrome.cookies.set({
             		url : CDAConsts.getUrl(Environment.env),
             		name : 'gw_sess_id',
