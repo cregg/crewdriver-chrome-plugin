@@ -14,10 +14,8 @@ var jobStatusStyle = {
 }
 var JobRow = React.createClass({
   handleClick : function(event){
-    this.props.table.setState({
-      hide : 'hide'
-    });
     this.props.handleJobView();
+    // This block is also in NotificationListItem.jsx. Should be refactored. 
     var outSMSAjax = OutSMSAjax.getJobs(this.props.job.jobId);
     var confirmedAjax = ConfirmedAjax.getConfirmed(this.props.job.jobId);
     var thisJob = this.props.job;

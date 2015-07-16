@@ -10,6 +10,9 @@ var JobAjax = {
 			dataType : 'json'
 
 	});
+	},
+	getJob: function(id){
+		return $.getJSON(CDAConsts.getUrl(Environment.env) + 'rest/jobs/' + id);
 	}
 };
 

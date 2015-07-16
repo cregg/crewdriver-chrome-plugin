@@ -5,6 +5,7 @@ var List = mui.List;
 var ListItem = mui.ListItem;
 var Avatar = mui.Avatar;
 var NotificationsAjax = require('./NotificationsAjax.js');
+var NotificationListItem = require('./NotificationListItem.jsx');
 
 var NotificationList = React.createClass({
   childContextTypes: {
@@ -23,8 +24,11 @@ var NotificationList = React.createClass({
     var updates = this.props.updates;
     for(var i = 0; i < updates.length; i++){
       var avatar = <Avatar style={{fontSize : '15px'}} >{updates[i].jobId}</Avatar>;
-      listItems.push(<ListItem leftAvatar={avatar} 
-                                                primaryText={updates[i].details}/>);
+      listItems.push(<NotificationListItem leftAvatar={avatar} 
+                                                primaryText={updates[i].details}
+                                                notification={updates[i]}
+                                                hideLandingPage={this.props.handleJobView}
+                                                mountLandingPage={this.props.mountLandingPage} />);
     }
     return (
       <List subheader='Notifications'>

@@ -11,7 +11,7 @@ var NotificationAjax = {
 			notifications[i].viewed = true;
 		}
 		$.ajax({
-			url : CDAConsts.getUrl(Environment.env) + 'rest/messageUpdates/',
+			url : CDAConsts.getUrl(Environment.env) + 'rest/notifications/',
 			data : JSON.stringify(notifications),
 			method : 'PUT',
 			contentType : 'application/json',

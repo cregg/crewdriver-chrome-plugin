@@ -22,9 +22,6 @@ var ResultsTable = React.createClass({
     };
   },
   handleBackClick : function(){
-    this.props.table.setState({
-      hide : 'visible'
-    });
     this.props.mountLandingPage();
     React.unmountComponentAtNode(document.getElementById('inSMSTable'));
   },
@@ -42,7 +39,7 @@ var ResultsTable = React.createClass({
     messagedMessage += this.props.job.showName;
       return (
         <div>
-          <Tabs initialSelectedIndex={1}>
+          <Tabs initialSelectedIndex={1} inkBarStyle={{ display : 'none' }} >
             <Tab label="<- Return To Jobs" onActive={this.handleBackClick}
                                                                   style={{ backgroundColor : '#276B57' }} />
             <Tab label="Confirmed" style={{ backgroundColor : '#276B57' }} > 
