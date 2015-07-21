@@ -1,5 +1,5 @@
 var Environment = {
-	env : 'staging'
+	env : 'live'
 };
 
 module.exports = Environment;

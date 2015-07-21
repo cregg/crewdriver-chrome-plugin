@@ -199,7 +199,7 @@ module.exports = CrewDriverAppConsts;
 },{"1YiZ5S":26,"buffer":23}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var Environment = {
-	env : 'staging'
+	env : 'live'
 };
 
 module.exports = Environment;
@@ -662,6 +662,7 @@ var NotificationListItem = React.createClass({displayName: "NotificationListItem
       React.createElement("div", null, 
         React.createElement(ListItem, {leftAvatar: this.props.leftAvatar, 
                         primaryText: this.props.primaryText, 
+                        style: { fontSize : '12px'}, 
                         onClick: this.buildResultsTable})
       )
     );
@@ -680,15 +681,19 @@ var Environment = require('./Environment.js');
 
 var NotificationAjax = {
 	setNotificationsAsRead : function(notifications){
-		if(notifications.length <= 0){
-			return;
-		}
+		var unreadNotifications = [];
 		for(var i = 0; i < notifications.length; i++){
-			notifications[i].viewed = true;
+			if(!notifications[i].viewed){
+				notifications[i].viewed = true;
+				unreadNotifications.push(notifications[i]);
+			}
+		}
+		if(unreadNotifications.length <= 0){
+			return;
 		}
 		$.ajax({
 			url : CDAConsts.getUrl(Environment.env) + 'rest/notifications/',
-			data : JSON.stringify(notifications),
+			data : JSON.stringify(unreadNotifications),
 			method : 'PUT',
 			contentType : 'application/json',
 			success : function(response){
@@ -867,7 +872,7 @@ administratorCheck.fail(function(response) {
   $('#crewdriver').show();
 });
 
-}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_87c4ec25.js","/")
+}).call(this,require("1YiZ5S"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_60df7a00.js","/")
 },{"./Authenticate.js":1,"./JobAjax.js":9,"./JobTable.jsx":11,"./LandingPage.jsx":12,"./LoadingComponent.jsx":13,"./LoginComponent.jsx":14,"1YiZ5S":26,"buffer":23,"jquery":28,"material-ui":61,"react":334}],22:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!

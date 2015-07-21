@@ -4,15 +4,19 @@ var Environment = require('./Environment.js');
 
 var NotificationAjax = {
 	setNotificationsAsRead : function(notifications){
-		if(notifications.length <= 0){
-			return;
-		}
+		var unreadNotifications = [];
 		for(var i = 0; i < notifications.length; i++){
-			notifications[i].viewed = true;
+			if(!notifications[i].viewed){
+				notifications[i].viewed = true;
+				unreadNotifications.push(notifications[i]);
+			}
+		}
+		if(unreadNotifications.length <= 0){
+			return;
 		}
 		$.ajax({
 			url : CDAConsts.getUrl(Environment.env) + 'rest/notifications/',
-			data : JSON.stringify(notifications),
+			data : JSON.stringify(unreadNotifications),
 			method : 'PUT',
 			contentType : 'application/json',
 			success : function(response){

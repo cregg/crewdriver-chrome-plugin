@@ -37,6 +37,7 @@ var NotificationListItem = React.createClass({
       <div>
         <ListItem leftAvatar={this.props.leftAvatar} 
                         primaryText={this.props.primaryText} 
+                        style={{ fontSize : '12px' }}
                         onClick={this.buildResultsTable}/> 
       </div>
     );
