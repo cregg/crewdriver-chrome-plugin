@@ -28,11 +28,11 @@ var JobRow = React.createClass({
       React.unmountComponentAtNode(document.getElementById('loading'));
       var confirmedList = ConfirmedAjax.getCrewObjects(confirmedListResponse[0].contractorHash);
       React.render(<ResultsTable confirmed={confirmedList}
-                                                      rows={outList}
-                                                      job={thisJob}
-                                                      table={thisTable}
-                                                      mountLandingPage={thisJobRow.props.mountLandingPage} />,
-                                                      document.getElementById('inSMSTable')); 
+                                  rows={outList}
+                                  job={thisJob}
+                                  table={thisTable}
+                                  mountLandingPage={thisJobRow.props.mountLandingPage} />,
+                                  document.getElementById('inSMSTable')); 
     });
   },
   render: function() {

@@ -17,13 +17,10 @@ var minifyCSS = require('gulp-minify-css');
 var jshint = require('gulp-jshint');
 
 // Test Dependencies
-var mochaPhantomjs = require('gulp-mocha-phantomjs');
+// var mochaPhantomjs = require('gulp-mocha-phantomjs');
 
 // Open Index
 var open = require('gulp-open');
-
-// Set env variables
-var env = require('gulp-env');
 
 var gutil = require('gulp-util');
 
@@ -60,10 +57,10 @@ gulp.task('browserify-test', ['lint-test'], function() {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('test', ['lint-test', 'browserify-test'], function() {
-  return gulp.src('test/client/index.html')
-    .pipe(mochaPhantomjs());
-});
+// gulp.task('test', ['lint-test', 'browserify-test'], function() {
+//   return gulp.src('test/client/index.html')
+//     .pipe(mochaPhantomjs());
+// });
 
 gulp.task('watch', function() {
   gulp.watch('client/**/*.js', ['browserify-client']);
@@ -101,4 +98,4 @@ gulp.task('open', function(){
 
 gulp.task('build', ['minify', 'uglify']);
 
-gulp.task('default', ['test', 'build', 'watch']);
+gulp.task('default', ['build', 'watch']);

@@ -50,11 +50,12 @@ var LandingPage = React.createClass({
     win.focus(); 
   },
   render: function() {
-    var updates = JSON.parse(localStorage.getItem('updates'));
+    var updates = this.props.notes;
+    
     var landingPage = !this.state.visible ? '' : 
     <Tabs initialSelectedIndex={this.state.activeTab} inkBarStyle={{ display : 'none' }} >
       <Tab label='Notifications' style={{ backgroundColor : '#276B57' }}>
-        <NotificationList updates={updates} 
+        <NotificationList updates={updates != null ? updates : []} 
                                     handleJobView={this.handleJobView} 
                                     mountLandingPage={this.handleMount} />
       </Tab>
@@ -67,16 +68,16 @@ var LandingPage = React.createClass({
     return (
       <div>
         {landingPage}         
-        <AppBar title='CrewDriver'
-                        style={{ backgroundColor : '#276B57' }}
-                        iconElementLeft={<IconButton iconClassName="material-icons"
-                                                                              tooltip='DashBoard' 
-                                                                              tooltipPosition='top-right'
-                                                                              onClick={this.openCallsListPage}>home</IconButton>}
-                        iconElementRight={<IconButton iconClassName="material-icons"
-                                                                                tooltip='Create Call' 
-                                                                                tooltipPosition='top-left'
-                                                                                onClick={this.openNewCallPage}>add</IconButton>} />
+        <AppBar title=''
+                style={{ backgroundColor : '#276B57' }}
+                iconElementLeft={<IconButton iconClassName="material-icons"
+                                             tooltip='DashBoard' 
+                                             tooltipPosition='top-right'
+                                             onClick={this.openCallsListPage}>home</IconButton>}
+                iconElementRight={<IconButton iconClassName="material-icons"
+                                              tooltip='Create Call' 
+                                              tooltipPosition='top-left'
+                                              onClick={this.openNewCallPage}>add</IconButton>} />
       </div>
     );
   }

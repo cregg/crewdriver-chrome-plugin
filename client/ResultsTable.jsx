@@ -8,6 +8,7 @@ var injectTapEventPlugin = require("react-tap-event-plugin");
 var mui = require('material-ui');
 var Tabs = mui.Tabs;
 var Tab = mui.Tab;
+var Table = mui.Table;
 var ThemeManager = new mui.Styles.ThemeManager();
 
 injectTapEventPlugin();

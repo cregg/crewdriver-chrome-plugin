@@ -8,6 +8,8 @@ var JobTable = require('./JobTable.jsx');
 var JobAjax = require('./JobAjax.js');
 var LoadingComponent = require('./LoadingComponent.jsx');
 var LandingPage = require('./LandingPage.jsx');
+var NotesAjax = require('./NotesAjax.js');
+var $ = require('jquery');
 
 var LoginComponent = React.createClass({
   childContextTypes: {
@@ -33,10 +35,12 @@ var LoginComponent = React.createClass({
     ajaxAuth.done(function(key){
       Authenticate.setCookie(key);     
       var jobsAjax = JobAjax.getJobs();
-      jobsAjax.done(function(response){
+      var notesAjax = NotesAjax.getNotes();
+      $.when(notesAjax, jobsAjax).done(function(notesResponse, jobsResponse){
         React.unmountComponentAtNode(document.getElementById('loading'));
-        var jobs = response;
-        React.render(<LandingPage jobs={jobs} />, document.getElementById('jobRows'));
+        var jobs = jobsResponse[0];
+        var notes = notesResponse[0];
+        React.render(<LandingPage jobs={jobs} notes={notes}/>, document.getElementById('jobRows'));
       });
     });
   },

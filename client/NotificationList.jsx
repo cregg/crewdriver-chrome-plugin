@@ -22,7 +22,8 @@ var NotificationList = React.createClass({
   render: function() {
     var listItems = [];
     var updates = this.props.updates;
-    for(var i = 0; i < updates.length; i++){
+    var updatesOrTen = updates.length > 10 ? 10 : updates.length;
+    for(var i = 0; i < updatesOrTen; i++){
       var avatar = <Avatar style={{fontSize : '15px'}} >{updates[i].jobId}</Avatar>;
       listItems.push(<NotificationListItem leftAvatar={avatar} 
                                                 primaryText={updates[i].details}
@@ -31,9 +32,11 @@ var NotificationList = React.createClass({
                                                 mountLandingPage={this.props.mountLandingPage} />);
     }
     return (
-      <List subheader='Notifications'>
-        {listItems}
-      </List>
+      <div style={{ 'overflow-y' : 'scroll', 'max-height' : '350px' }}>
+        <List subheader='Notifications'>
+          {listItems}
+        </List>
+      </div>
     );
   }
 
