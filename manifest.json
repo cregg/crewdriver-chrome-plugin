@@ -12,6 +12,7 @@
    "default_popup": "public/index.html"
   },
   "permissions": [
+   "tabs",
    "cookies",
   "https://go.crewdriverapp.com/*",
   "http://stagedriver.herokuapp.com/*"

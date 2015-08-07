@@ -69,7 +69,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('styles', function() {
-  return gulp.src('client/less/*.less')
+  return gulp.src('client/less/index.less')
     .pipe(less())
     .pipe(prefix({ cascade: true }))
     .pipe(rename('crewdriver.css'))

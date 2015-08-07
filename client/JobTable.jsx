@@ -17,16 +17,19 @@ var JobTable = React.createClass({
   getButtonColor: function(status){
     if(status === 'All Done'){
       return {
-        color : '#5CB85C'
+        left: '-10px',
+        color: '#5CB85C',
       };
     }
     if(status === 'Complete'){
      return {
-        color : '#D9534F'
+        left: '-10px',
+        color : '#D9534F',
       }; 
     }
     return {
-      color: '#F0AD4E'
+      left: '-10px',
+      color: '#F0AD4E',
     };
   },
   getInitialState : function(){
@@ -59,29 +62,58 @@ var JobTable = React.createClass({
 
   },
   generateRowData: function(job){
-    var linkHTML = <div title=''><IconButton iconStyle={this.getButtonColor(job.status)}
-                                             iconClassName="material-icons"
-                                             onClick={this.showJobInfo.bind(null, job)}>pageview</IconButton> {job.jobId}</div>
-
-    // <a href="#" title="" onClick={this.showJobInfo.bind(null, job)}><i className="material-icons">pageview</i> {job.jobId}</a>;
+    var linkHTML = <IconButton iconStyle={this.getButtonColor(job.status)}
+                               iconClassName="material-icons"
+                               onClick={this.showJobInfo.bind(null, job)}>pageview</IconButton>
     return {
       view: {
-        content: linkHTML
+        content: linkHTML,
+        style: {
+          textAlign: 'left',
+          width: '8%',
+        },
       },
       id: {
-        content: job.jobId
+        content: job.jobId,
+        style: {
+          textAlign: 'left',
+          overflow: 'hidden',
+          width: '8%',
+          textOverflow: 'clip',
+        }
       },
       show: {
-        content: "" + job.showName + " " + job.callName
+        content: "" + job.showName + " " + job.callName,
+        style: {
+          textAlign: 'left',
+          width: '15%',
+          textOverflow: 'scroll',
+          overflow: 'scroll',
+        },
       },
       shifts: {
-        content: job.jobSlots
+        content: job.jobSlots,
+        style: {
+          textAlign: 'left',
+          width: '10%',
+          textOverflow: 'clip',
+        },
       },
       tier: {
-        content: job.tier
+        content: job.tier,
+        style: {
+          textAlign: 'left',
+          width: '10%',
+          textOverflow: 'clip',
+        },
       },
       escalatesIn: {
-        content: job.nextActionRelative
+        content: job.nextActionRelative,
+        style: {
+          textAlign: 'left',
+          width: '10%',
+          textOverflow: 'clip',
+        },
       },
     }
   },
@@ -90,22 +122,47 @@ var JobTable = React.createClass({
     var jobs = this.props.jobs;
     var headerCols = {
       view: {
-        content: 'View'
+        content: 'View',
+        style: {
+          textAlign: 'left',
+          width: '8%',
+        },
       },
       id : {
         content: 'ID',
+        style: {
+          textAlign: 'left',
+          overflow: 'hidden',
+          width: '8%',
+        }
       },
       show: {
         content: 'Show',
+        style: {
+          textAlign: 'left',
+          width: '15%',
+        },
       },
       shifts: {
-        content: 'Shifts'
+        content: 'Shifts',
+        style: {
+          textAlign: 'left',
+          width: '10%',
+        },
       },
       tier: {
-        content: 'Tier'
+        content: 'Tier',
+        style: {
+          textAlign: 'left',
+          width: '10%',
+        },
       },
       escalatesIn: {
-        content: 'Jumps In'
+        content: 'Jumps In',
+        style: {
+          textAlign: 'right',
+          width: '10%',
+        },
       }
     };
     var columnOrder = ['id', 'show', 'shifts', 'tier', 'escalatesIn', 'view'];

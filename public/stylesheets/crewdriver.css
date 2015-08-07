@@ -8886,3 +8886,46 @@ button.picker__close:focus {
     margin-bottom: 5em;
   }
 }
+body {
+  background-color: #F5F5F5;
+  width: 650px;
+  height: 400px;
+}
+#jobRows {
+  width: 650px;
+}
+#crewdriver {
+  width: 650px;
+}
+#inSMSTable {
+  width: 650px;
+}
+#loading {
+  width: 650px;
+}
+#jobTable {
+  -webkit-transition: .6s opacity;
+          transition: .6s opacity;
+  font-size: 10px;
+}
+.fadeOut {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s 2s, opacity 2s linear;
+          transition: visibility 0s 2s, opacity 2s linear;
+}
+.fadeIn {
+  opacity: 1;
+}
+.hidden {
+  display: none;
+}
+.pointer_click {
+  cursor: pointer;
+}
+.overFlowY {
+  overflow-y: scroll;
+}
+.tab-color {
+  background-color: #276B57;
+}
