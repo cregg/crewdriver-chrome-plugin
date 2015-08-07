@@ -111,11 +111,6 @@ var JobTable = React.createClass({
     var columnOrder = ['id', 'show', 'shifts', 'tier', 'escalatesIn', 'view'];
     for(var i = 0; i < jobs.length; i++){
       rows.push(this.generateRowData(jobs[i]));
-      // rows.push(<JobRow job={jobs[i]} 
-      //                                     key={jobs[i].id} 
-      //                                     table={this} 
-      //                                     handleJobView={this.props.handleJobView} 
-      //                                     mountLandingPage={this.props.mountLandingPage}/>);
     }
     var divClassNames = ClassNames(this.state.hide);
     return (
